@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobdev_app/screens/Dashboard.dart';
 import 'package:mobdev_app/widgets/CustomTextField.dart';
 import 'package:mobdev_app/widgets/PasswordField.dart';
 import 'package:mobdev_app/widgets/PrimaryButton.dart';
@@ -45,7 +46,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 20.0,
                     ),
                     PrimaryButton(
-                        text: "Login", iconData: Icons.login, onPress: () {})
+                      text: "Login",
+                      iconData: Icons.login,
+                      onPress: () {
+                        Navigator.pushReplacementNamed(
+                            context, Dashboard.routeName);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    PrimaryButton(
+                        text: "Signup",
+                        iconData: Icons.person_add,
+                        onPress: () {})
                   ],
                 ),
               ),
