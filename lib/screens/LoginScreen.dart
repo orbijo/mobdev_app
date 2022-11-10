@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobdev_app/arguments/FormData.dart';
 import 'package:mobdev_app/screens/Dashboard.dart';
 import 'package:mobdev_app/screens/Signup.dart';
 import 'package:mobdev_app/widgets/CustomTextField.dart';
@@ -51,7 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       iconData: Icons.login,
                       onPress: () {
                         Navigator.pushReplacementNamed(
-                            context, Dashboard.routeName);
+                            context, Dashboard.routeName, 
+                            arguments: FormData(emailController.text));
                       },
                     ),
                     const SizedBox(
