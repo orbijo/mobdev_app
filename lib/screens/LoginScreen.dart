@@ -34,8 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 210,
                     width: 210),
                   Text(
-                    "Login\n",
-                    style: Theme.of(context).textTheme.displaySmall,
+                    "Starbucks\n",
+                    style: TextStyle(
+                      fontFamily: 'SoDoSans', 
+                      fontSize: 60,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
+                    
                     textAlign: TextAlign.center,
                   ),
                   CustomTextField(
@@ -51,7 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: handleObscurePassword,
                       labelText: "Password",
                       hintText: "Enter your password",
-                      controller: passwordController),
+                      controller: passwordController,
+                      ),
                   const SizedBox(
                     height: 20.0,
                   ),
