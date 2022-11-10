@@ -26,9 +26,21 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     var formdata = ModalRoute.of(context)!.settings.arguments as FormData;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dashboard'),
+        title: Center(
+          child: Container(
+            padding: EdgeInsets.only(left: 50.0),
+            child: const Text(
+              'Dashboard',
+              style: TextStyle(
+                fontFamily: 'SoDoSans',
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
         actions: [
           GestureDetector(
             onTap: () {
@@ -47,23 +59,31 @@ class _DashboardState extends State<Dashboard> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            formdata.email,
-            style: Theme.of(context).textTheme.displaySmall,
+          Container(
+            padding: EdgeInsets.only(top: 10.0),
+            child: Center(
+              child: SizedBox(
+                width: width * 0.9,
+                child: Text(
+                  "Hello, ${formdata.email}!",
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontFamily: 'SoDoSans',
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ),
           ),
           Expanded(
             child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    'Button tapped $_counter time${_counter == 1 ? '' : 's'}.',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  const SizedBox(height: 18),
-                  ElevatedButton(
-                    onPressed: _launchPlatformCount,
-                    child: const Text('Continue in iOS view'),
+                  Row(
+                    children: [],
                   ),
                 ],
               ),
@@ -73,13 +93,17 @@ class _DashboardState extends State<Dashboard> {
             padding: const EdgeInsets.only(bottom: 15, left: 5),
             child: Row(
               children: [
-                Image.asset('images/starbs2.png', height: 50, width: 50),
-                SizedBox(
+                Image.asset('images/starbs2.png', height: 45, width: 45),
+                const SizedBox(
                   width: 8.0,
                 ),
                 Text(
                   'Starbucks',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: TextStyle(
+                    fontFamily: 'SoDoSans',
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

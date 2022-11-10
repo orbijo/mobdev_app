@@ -29,18 +29,14 @@ class _LoginScreenState extends State<LoginScreen> {
               width: width * .9,
               child: Column(
                 children: [
-                  Image.asset(
-                    'images/starbs2.png',
-                    height: 210,
-                    width: 210),
+                  Image.asset('images/starbs2.png', height: 210, width: 210),
                   Text(
                     "Starbucks\n",
                     style: TextStyle(
-                      fontFamily: 'SoDoSans', 
-                      fontSize: 60,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
-                    
+                        fontFamily: 'SoDoSans',
+                        fontSize: 60,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                   CustomTextField(
@@ -52,12 +48,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20.0,
                   ),
                   PasswordField(
-                      obscureText: obscurePassword,
-                      onTap: handleObscurePassword,
-                      labelText: "Password",
-                      hintText: "Enter your password",
-                      controller: passwordController,
-                      ),
+                    obscureText: obscurePassword,
+                    onTap: handleObscurePassword,
+                    labelText: "Password",
+                    hintText: "Enter your password",
+                    controller: passwordController,
+                  ),
                   const SizedBox(
                     height: 20.0,
                   ),
