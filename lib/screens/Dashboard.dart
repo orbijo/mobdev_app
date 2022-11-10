@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobdev_app/screens/Settings.dart';
+import 'package:mobdev_app/arguments/FormData.dart';
 
 class Dashboard extends StatefulWidget {
   static String routeName = "/dashboard";
@@ -9,8 +10,10 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  
   @override
   Widget build(BuildContext context) {
+    var formdata = ModalRoute.of(context)!.settings.arguments as FormData;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -28,9 +31,21 @@ class _DashboardState extends State<Dashboard> {
           )
         ],
       ),
-      body: const Center(
-        child: Text("Dashboard"),
-      ),
-    );
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Text("Welcome, \n",
+                    style: Theme.of(context).textTheme.displaySmall,
+                    textAlign: TextAlign.center,
+                   ),
+                   Text(formdata.email)
+               ]
+               
+                ),
+
+
+            );
+       
   }
+
 }
