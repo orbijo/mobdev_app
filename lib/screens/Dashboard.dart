@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mobdev_app/screens/Settings.dart';
 import 'package:mobdev_app/arguments/FormData.dart';
@@ -12,21 +11,11 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  static const MethodChannel _methodChannel =
-      MethodChannel('dev.flutter.sample/platform_view_swift');
-
-  int _counter = 0;
-
-  Future<void> _launchPlatformCount() async {
-    final platformCounter =
-        await _methodChannel.invokeMethod<int>('switchView', _counter);
-    setState(() => _counter = platformCounter ?? 0);
-  }
-
   @override
   Widget build(BuildContext context) {
     var formdata = ModalRoute.of(context)!.settings.arguments as FormData;
     double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -58,35 +47,183 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: EdgeInsets.only(top: 10.0),
+            padding: EdgeInsets.only(top: 50.0, left: 10, right: 10),
             child: Center(
-              child: SizedBox(
-                width: width * 0.9,
-                child: Text(
-                  "Hello, ${formdata.email}!",
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontFamily: 'SoDoSans',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    fontSize: 30,
-                  ),
+              child: Text(
+                "Hello, ${(formdata.email)}!",
+                overflow: TextOverflow.clip,
+                style: const TextStyle(
+                  fontFamily: 'SoDoSans',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                  fontSize: 26,
                 ),
               ),
             ),
           ),
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    children: [],
+          Container(
+            child: Column(
+              children: [
+                Container(
+                  child: Row(
+                    children: [
+                      Column(
+                        children: [
+                          Card(
+                            color: Color.fromARGB(255, 234, 199, 132),
+                            child: SizedBox(
+                              child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  'Latte',
+                                  style: TextStyle(
+                                    fontFamily: 'SoDoSans',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 48,
+                                  ),
+                                ),
+                              ),
+                              width: width * 0.50,
+                              height: height * 0.25,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Card(
+                                color: Color.fromARGB(255, 96, 76, 76),
+                                child: SizedBox(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      'Tea',
+                                      style: TextStyle(
+                                        fontFamily: 'SoDoSans',
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  width: width * 0.45,
+                                  height: height * 0.09,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Card(
+                                color: Color.fromARGB(255, 54, 36, 21),
+                                child: SizedBox(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      'Coffee',
+                                      style: TextStyle(
+                                        fontFamily: 'SoDoSans',
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white,
+                                        fontSize: 30,
+                                      ),
+                                    ),
+                                  ),
+                                  width: width * 0.45,
+                                  height: height * 0.15,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      Column(
+                        children: [
+                          Card(
+                            color: Color.fromARGB(255, 96, 76, 76),
+                            child: SizedBox(
+                              child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  'Caffeine',
+                                  style: TextStyle(
+                                    fontFamily: 'SoDoSans',
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                    fontSize: 28,
+                                  ),
+                                ),
+                              ),
+                              width: width * 0.50,
+                              height: height * 0.25,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Card(
+                                color: Color.fromARGB(255, 234, 199, 132),
+                                child: SizedBox(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      'Frappe',
+                                      style: TextStyle(
+                                        fontFamily: 'SoDoSans',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                  ),
+                                  width: width * 0.45,
+                                  height: height * 0.09,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Card(
+                                color: Color.fromARGB(255, 54, 36, 21),
+                                child: SizedBox(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      'Espresso',
+                                      style: TextStyle(
+                                        fontFamily: 'SoDoSans',
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white,
+                                        fontSize: 26,
+                                      ),
+                                    ),
+                                  ),
+                                  width: width * 0.45,
+                                  height: height * 0.15,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
@@ -111,47 +248,9 @@ class _DashboardState extends State<Dashboard> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => _counter++),
-        tooltip: 'Increment',
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
     );
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     actions: [
-    //       GestureDetector(
-    //         onTap: () {
-    //           Navigator.pushNamed(context, Settings.routeName);
-    //         },
-    //         child: const Padding(
-    //           padding: EdgeInsets.only(right: 15.0),
-    //           child: Icon(
-    //             Icons.settings,
-    //             size: 30,
-    //           ),
-    //         ),
-    //       )
-    //     ],
-    //   ),
-    //   // body: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-    //   //   Text(
-    //   //     "Welcome",
-    //   //     style: Theme.of(context).textTheme.displaySmall,
-    //   //     textAlign: TextAlign.center,
-    //   //   ),
-    //   //   Text(
-    //   //     formdata.email,
-    //   //     style: Theme.of(context).textTheme.displaySmall,
-    //   //     textAlign: TextAlign.center,
-    //   //   )
-    //   // ]),
-    //   body: Center(
-    //     child: Row(
-    //       children: [
-    //         Center()
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }
