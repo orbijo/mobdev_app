@@ -29,7 +29,10 @@ class _LoginScreenState extends State<LoginScreen> {
               width: width * .9,
               child: Column(
                 children: [
-                  Image.asset('images/starbs1.jpg'),
+                  Image.asset(
+                    'images/starbs2.png',
+                    height: 210,
+                    width: 210),
                   Text(
                     "Login\n",
                     style: Theme.of(context).textTheme.displaySmall,
