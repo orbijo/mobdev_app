@@ -22,51 +22,54 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Container(
-                width: width * .9,
-                child: Column(
-                  children: [
-                    CustomTextField(
-                        labelText: "Email Address",
-                        hintText: "Enter your email address",
-                        controller: emailController,
-                        textInputType: TextInputType.emailAddress),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    PasswordField(
-                        obscureText: obscurePassword,
-                        onTap: handleObscurePassword,
-                        labelText: "Password",
-                        hintText: "Enter your password",
-                        controller: passwordController),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    PrimaryButton(
-                      text: "Login",
-                      iconData: Icons.login,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Center(
+            child: SizedBox(
+              width: width * .9,
+              child: Column(
+                children: [
+                  Text(
+                    "Login\n",
+                    style: Theme.of(context).textTheme.displaySmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  CustomTextField(
+                      labelText: "Email Address",
+                      hintText: "Enter your email address",
+                      controller: emailController,
+                      textInputType: TextInputType.emailAddress),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  PasswordField(
+                      obscureText: obscurePassword,
+                      onTap: handleObscurePassword,
+                      labelText: "Password",
+                      hintText: "Enter your password",
+                      controller: passwordController),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  PrimaryButton(
+                    text: "Login",
+                    iconData: Icons.login,
+                    onPress: () {
+                      Navigator.pushReplacementNamed(
+                          context, Dashboard.routeName,
+                          arguments: FormData(emailController.text));
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  PrimaryButton(
+                      text: "Signup",
+                      iconData: Icons.person_add,
                       onPress: () {
-                        Navigator.pushReplacementNamed(
-                            context, Dashboard.routeName, 
-                            arguments: FormData(emailController.text));
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    PrimaryButton(
-                        text: "Signup",
-                        iconData: Icons.person_add,
-                        onPress: () {
-                          Navigator.pushNamed(context, Signup.routeName);
-                        })
-                  ],
-                ),
+                        Navigator.pushNamed(context, Signup.routeName);
+                      })
+                ],
               ),
             ),
           ),
