@@ -1,5 +1,5 @@
-class FormData{
-  String email;
+class FormData {
+  String nameStr;
 
-  FormData(this.email);
+  FormData(this.nameStr);
 }

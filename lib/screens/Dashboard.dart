@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mobdev_app/screens/Settings.dart';
 import 'package:mobdev_app/arguments/FormData.dart';
@@ -11,9 +13,11 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    var formdata = ModalRoute.of(context)!.settings.arguments as FormData;
+    final user = FirebaseAuth.instance.currentUser!;
+    // var formdata = ModalRoute.of(context)!.settings.arguments as FormData;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -53,7 +57,8 @@ class _DashboardState extends State<Dashboard> {
             padding: EdgeInsets.only(top: 50.0, left: 10, right: 10),
             child: Center(
               child: Text(
-                "Hello, ${(formdata.email)}!",
+                // "Hello, ${(formdata.email)}!",
+                user.email!,
                 overflow: TextOverflow.clip,
                 style: const TextStyle(
                   fontFamily: 'SoDoSans',
@@ -62,187 +67,6 @@ class _DashboardState extends State<Dashboard> {
                   fontSize: 26,
                 ),
               ),
-            ),
-          ),
-          Container(
-            child: Column(
-              children: [
-                Container(
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Card(
-                            color: Color.fromARGB(255, 234, 199, 132),
-                            child: SizedBox(
-                              child: Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  'Latte',
-                                  style: TextStyle(
-                                    fontFamily: 'SoDoSans',
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 48,
-                                  ),
-                                ),
-                              ),
-                              width: width * 0.50,
-                              height: height * 0.25,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Card(
-                                color: Color.fromARGB(255, 96, 76, 76),
-                                child: SizedBox(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      'Tea',
-                                      style: TextStyle(
-                                        fontFamily: 'SoDoSans',
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                  ),
-                                  width: width * 0.45,
-                                  height: height * 0.09,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Card(
-                                color: Color.fromARGB(255, 54, 36, 21),
-                                child: SizedBox(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      'Coffee',
-                                      style: TextStyle(
-                                        fontFamily: 'SoDoSans',
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white,
-                                        fontSize: 30,
-                                      ),
-                                    ),
-                                  ),
-                                  width: width * 0.45,
-                                  height: height * 0.15,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Card(
-                            color: Color.fromARGB(255, 96, 76, 76),
-                            child: SizedBox(
-                              child: Padding(
-                                padding: EdgeInsets.all(10),
-                                child: Text(
-                                  'Caffeine',
-                                  style: TextStyle(
-                                    fontFamily: 'SoDoSans',
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                    fontSize: 28,
-                                  ),
-                                ),
-                              ),
-                              width: width * 0.50,
-                              height: height * 0.25,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Card(
-                                color: Color.fromARGB(255, 234, 199, 132),
-                                child: SizedBox(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      'Frappe',
-                                      style: TextStyle(
-                                        fontFamily: 'SoDoSans',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 22,
-                                      ),
-                                    ),
-                                  ),
-                                  width: width * 0.45,
-                                  height: height * 0.09,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Card(
-                                color: Color.fromARGB(255, 54, 36, 21),
-                                child: SizedBox(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Text(
-                                      'Espresso',
-                                      style: TextStyle(
-                                        fontFamily: 'SoDoSans',
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white,
-                                        fontSize: 26,
-                                      ),
-                                    ),
-                                  ),
-                                  width: width * 0.45,
-                                  height: height * 0.15,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(bottom: 15, left: 5),
-            child: Row(
-              children: [
-                Image.asset('images/starbs2.png', height: 45, width: 45),
-                const SizedBox(
-                  width: 8.0,
-                ),
-                Text(
-                  'Starbucks',
-                  style: TextStyle(
-                    fontFamily: 'SoDoSans',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
             ),
           ),
         ],

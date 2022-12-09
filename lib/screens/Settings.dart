@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mobdev_app/screens/LoginScreen.dart';
+import 'package:mobdev_app/services/AuthService.dart';
 import 'package:mobdev_app/widgets/PrimaryButton.dart';
 
 class Settings extends StatefulWidget {
@@ -10,6 +12,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +63,18 @@ class _SettingsState extends State<Settings> {
               ),
               label: const Text('About')),
           ElevatedButton.icon(
-              onPressed: () {
+              onPressed: () async {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Center(
+                          child: SpinKitFadingCube(
+                        color: Colors.white,
+                        size: 25,
+                      ));
+                    });
+                await _authService.logout();
+                Navigator.of(context).pop();
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     LoginScreen.routeName, (Route<dynamic> route) => false);
               },

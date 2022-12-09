@@ -1,4 +1,8 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mobdev_app/screens/Dashboard.dart';
 import 'package:mobdev_app/screens/LoginScreen.dart';
 import 'package:mobdev_app/screens/Settings.dart';
@@ -21,6 +25,9 @@ class _SignupState extends State<Signup> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
   bool obscurePassword = true;
+  bool passwordTooWeak = false;
+  bool emailAlreadyExist = false;
+  bool passwordMismatch = false;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -32,29 +39,35 @@ class _SignupState extends State<Signup> {
               width: width * .9,
               child: Column(
                 children: [
-                  CustomTextField(
-                    labelText: "First Name",
-                    hintText: "Enter your first name",
-                    controller: firstNameController,
-                    textInputType: TextInputType.name,
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  CustomTextField(
-                    labelText: "Last Name",
-                    hintText: "Enter your last name",
-                    controller: lastNameController,
-                    textInputType: TextInputType.name,
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
+                  // CustomTextField(
+                  //   labelText: "First Name",
+                  //   hintText: "Enter your first name",
+                  //   controller: firstNameController,
+                  //   textInputType: TextInputType.name,
+                  // ),
+                  // const SizedBox(
+                  //   height: 20.0,
+                  // ),
+                  // CustomTextField(
+                  //   labelText: "Last Name",
+                  //   hintText: "Enter your last name",
+                  //   controller: lastNameController,
+                  //   textInputType: TextInputType.name,
+                  // ),
+                  // const SizedBox(
+                  //   height: 20.0,
+                  // ),
                   CustomTextField(
                     labelText: "Email Address",
                     hintText: "Enter your email address",
                     controller: emailController,
                     textInputType: TextInputType.emailAddress,
+                  ),
+                  Visibility(
+                    child: Text(
+                      'The account already exists for that email.',
+                    ),
+                    visible: emailAlreadyExist,
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -66,6 +79,12 @@ class _SignupState extends State<Signup> {
                     hintText: "Enter your password",
                     controller: passwordController,
                   ),
+                  Visibility(
+                    child: Text(
+                      'The password provided is too weak.',
+                    ),
+                    visible: passwordTooWeak,
+                  ),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -76,6 +95,12 @@ class _SignupState extends State<Signup> {
                     hintText: "Re-enter your password",
                     controller: confirmPassController,
                   ),
+                  Visibility(
+                    child: Text(
+                      'Passwords do not match.',
+                    ),
+                    visible: passwordMismatch,
+                  ),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -83,7 +108,7 @@ class _SignupState extends State<Signup> {
                     text: "Signup",
                     iconData: Icons.person_add,
                     onPress: () {
-                      Navigator.pop(context);
+                      signUp();
                     },
                   ),
                   const SizedBox(
@@ -105,9 +130,66 @@ class _SignupState extends State<Signup> {
     );
   }
 
+  resetChecks() {
+    setState(() {
+      obscurePassword = true;
+      passwordTooWeak = false;
+      emailAlreadyExist = false;
+      passwordMismatch = false;
+    });
+  }
+
+  handleConfirmPassword() {
+    if (passwordController.text != confirmPassController.text) {
+      setState(() {
+        passwordMismatch = true;
+      });
+    } else {
+      passwordMismatch = false;
+    }
+  }
+
   handleObscurePassword() {
     setState(() {
       obscurePassword = !obscurePassword;
     });
+  }
+
+  signUp() async {
+    resetChecks();
+    handleConfirmPassword();
+    if (!passwordMismatch) {
+      try {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: SpinKitFadingCube(
+                color: Colors.white,
+                size: 25,
+              ));
+            });
+        final credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pop();
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          setState(() {
+            passwordTooWeak = true;
+          });
+        } else if (e.code == 'email-already-in-use') {
+          setState(() {
+            emailAlreadyExist = true;
+          });
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
   }
 }
