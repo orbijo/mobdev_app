@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mobdev_app/screens/LoginScreen.dart';
 import 'package:mobdev_app/services/AuthService.dart';
+import 'package:mobdev_app/services/StorageService.dart';
 import 'package:mobdev_app/widgets/PrimaryButton.dart';
 
 class Settings extends StatefulWidget {
@@ -12,6 +13,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  StorageService _storageService = StorageService();
   AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,7 @@ class _SettingsState extends State<Settings> {
                       ));
                     });
                 await _authService.logout();
+                _storageService.deleteAllData();
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     LoginScreen.routeName, (Route<dynamic> route) => false);

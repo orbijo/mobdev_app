@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobdev_app/arguments/FormData.dart';
+import 'package:mobdev_app/models/StorageItem.dart';
 import 'package:mobdev_app/screens/Dashboard.dart';
 import 'package:mobdev_app/screens/Signup.dart';
 import 'package:mobdev_app/services/AuthService.dart';
+import 'package:mobdev_app/services/StorageService.dart';
 import 'package:mobdev_app/widgets/CustomTextField.dart';
 import 'package:mobdev_app/widgets/PasswordField.dart';
 import 'package:mobdev_app/widgets/PrimaryButton.dart';
@@ -19,6 +21,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  StorageService _storageService = StorageService();
   AuthService _authService = AuthService();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -126,9 +129,12 @@ class _LoginScreenState extends State<LoginScreen> {
               size: 25,
             ));
           });
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
+      final user = await _authService.signWithEmailAndPassword(
+          emailController.text, passwordController.text);
+      print(user);
+      // var accessToken =
+      //     StorageItem("accessToken", user.credential?.accessToken as String);
+      // await _storageService.saveData(accessToken);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
       // ignore: use_build_context_synchronously
@@ -157,6 +163,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ));
           });
       var user = await _authService.signInWithGoogle();
+      print(user);
+      var accessToken =
+          StorageItem("accessToken", user.credential?.accessToken as String);
+      await _storageService.saveData(accessToken);
       Navigator.of(context).pop();
       // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(
