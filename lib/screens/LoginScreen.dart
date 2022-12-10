@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SignInButton(
                     Buttons.Google,
                     onPressed: () {
-                      loginWithGmail();
+                      loginWithGoogle();
                     },
                   ),
                 ],
@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  loginWithGmail() async {
+  loginWithGoogle() async {
     try {
       showDialog(
           context: context,
