@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
           });
       final user = await _authService.signWithEmailAndPassword(
           emailController.text, passwordController.text);
-      print(user);
+      // print(user);
       // var accessToken =
       //     StorageItem("accessToken", user.credential?.accessToken as String);
       // await _storageService.saveData(accessToken);
@@ -163,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ));
           });
       var user = await _authService.signInWithGoogle();
-      print(user);
+      // print(user);
       var accessToken =
           StorageItem("accessToken", user.credential?.accessToken as String);
       await _storageService.saveData(accessToken);

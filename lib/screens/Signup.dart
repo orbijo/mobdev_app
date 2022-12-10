@@ -178,6 +178,7 @@ class _SignupState extends State<Signup> {
         Navigator.of(context).pop();
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
+        Navigator.of(context).pop();
         if (e.code == 'weak-password') {
           setState(() {
             passwordTooWeak = true;
