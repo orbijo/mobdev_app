@@ -78,9 +78,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: "Login",
                     iconData: Icons.login,
                     onPress: () {
-                      // Navigator.pushReplacementNamed(
-                      //     context, Dashboard.routeName,
-                      //     arguments: FormData(emailController.text));
                       loginNative();
                     },
                   ),
@@ -131,10 +128,6 @@ class _LoginScreenState extends State<LoginScreen> {
           });
       final user = await _authService.signWithEmailAndPassword(
           emailController.text, passwordController.text);
-      // print(user);
-      // var accessToken =
-      //     StorageItem("accessToken", user.credential?.accessToken as String);
-      // await _storageService.saveData(accessToken);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
       // ignore: use_build_context_synchronously

@@ -39,24 +39,6 @@ class _SignupState extends State<Signup> {
               width: width * .9,
               child: Column(
                 children: [
-                  // CustomTextField(
-                  //   labelText: "First Name",
-                  //   hintText: "Enter your first name",
-                  //   controller: firstNameController,
-                  //   textInputType: TextInputType.name,
-                  // ),
-                  // const SizedBox(
-                  //   height: 20.0,
-                  // ),
-                  // CustomTextField(
-                  //   labelText: "Last Name",
-                  //   hintText: "Enter your last name",
-                  //   controller: lastNameController,
-                  //   textInputType: TextInputType.name,
-                  // ),
-                  // const SizedBox(
-                  //   height: 20.0,
-                  // ),
                   CustomTextField(
                     labelText: "Email Address",
                     hintText: "Enter your email address",
